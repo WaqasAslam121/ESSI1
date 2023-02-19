@@ -47,3 +47,16 @@ def update_customer(id, request: schemas.Customer, db: Session = Depends(get_db)
    
     db.commit()
     return customer
+
+@router.delete('/customer/{id}')
+def delete_customer(id, db: Session = Depends(get_db)):
+    record = db.query(models.CustomerModel).filter(
+        models.CustomerModel.id == id)
+
+    if not record.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Customer with id {id} not found")
+
+    record.delete(synchronize_session=False)
+    db.commit()
+    return 'Deleted'

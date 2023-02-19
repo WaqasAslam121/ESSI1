@@ -10,6 +10,9 @@ class ContactType(BaseModel):
     description: str
     active: bool
 
+class BuildingType(BaseModel):
+    description: str
+    active: bool
 
 class Customer(BaseModel):
     name: str

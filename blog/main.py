@@ -19,7 +19,7 @@ def get_db():
     finally:
         db.close()
 
-
+'''
 @app.post('/blog', status_code=status.HTTP_201_CREATED)
 def create(request: schemas.Blog, db: Session = Depends(get_db)):
     new_blog = models.BlogModel(title=request.title, body=request.body)
@@ -66,9 +66,9 @@ def update_blog(id, request: schemas.Blog, db: Session = Depends(get_db)):
     blog = db.query(models.BlogModel).filter(models.BlogModel.id == id).update(
         {'title': request.title, 'body': request.body})
 
-    '''if not blog.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Blog with id {id} not found")'''
+    #if not blog.first():
+    #    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+    #                        detail=f"Blog with id {id} not found")
     #  blog = db.query(models.BlogModel).filter(
     #      models.BlogModel.id == id).update(request)
 
@@ -76,3 +76,4 @@ def update_blog(id, request: schemas.Blog, db: Session = Depends(get_db)):
     db.commit()
 
     return blog
+'''
