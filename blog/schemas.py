@@ -14,6 +14,10 @@ class BuildingType(BaseModel):
     description: str
     active: bool
 
+class DocumentType(BaseModel):
+    description: str
+    active: bool
+
 class Customer(BaseModel):
     name: str
     primaryContact: str

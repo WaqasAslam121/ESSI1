@@ -21,6 +21,12 @@ class BuildingTypeModel(Base):
     description = Column(String)
     active = Column(Boolean)
 
+class DocumentTypeModel(Base):
+    __tablename__ = 'DocumentType'
+    id = Column(Integer, primary_key=True, index=True)
+    description = Column(String)
+    active = Column(Boolean)
+
 class CustomerModel(Base):
     __tablename__ = 'Customer'
     id = Column(Integer, primary_key=True, index=True)

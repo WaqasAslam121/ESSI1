@@ -76,7 +76,7 @@ def delete_buildingtype(id, db: Session = Depends(get_db)):
 
     if not record.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"ContactType with id {id} not found")
+                            detail=f"Building Type with id {id} not found")
 
     record.delete(synchronize_session=False)
     db.commit()
@@ -90,3 +90,40 @@ def get_buildingType(id, response: Response, db: Session = Depends(get_db)):
         return {'detail': 'Not Available'}
     return record
 #BuildingType --end
+
+#DocumentType --start
+@router.post('/documenttype', status_code=status.HTTP_201_CREATED)
+def createDocumentType(request: schemas.ContactType, db: Session = Depends(get_db)):
+    new_record = models.DocumentTypeModel(
+        description=request.description, active=True)
+    db.add(new_record)
+    db.commit()
+    db.refresh(new_record)
+    return new_record
+
+@router.get('/documenttype')
+def get_allDocumentType(db: Session = Depends(get_db)):
+    types = db.query(models.DocumentTypeModel).all()
+    return types
+
+@router.delete('/documenttype/{id}')
+def delete_documenttype(id, db: Session = Depends(get_db)):
+    record = db.query(models.DocumentTypeModel).filter(
+        models.DocumentTypeModel.id == id)
+
+    if not record.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Document Type with id {id} not found")
+
+    record.delete(synchronize_session=False)
+    db.commit()
+    return 'Deleted'
+
+@router.get('/documenttype/{id}', status_code=200)
+def get_documentType(id, response: Response, db: Session = Depends(get_db)):
+    record = db.query(models.DocumentTypeModel).filter(models.DocumentTypeModel.id == id).first()
+    if not record:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {'detail': 'Not Available'}
+    return record
+#DocumentType --end
