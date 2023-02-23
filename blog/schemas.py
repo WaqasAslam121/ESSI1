@@ -32,3 +32,15 @@ class Users(BaseModel):
     email: str
     password: str
     active: bool
+        
+class Project(BaseModel):
+    name: str
+    project_number: str
+    project_manager: str
+    site_id: int
+    owner_name: str
+    customer_id: int
+    customer_project_manager: str
+    contract_amount: str
+    start_date: date
+    completion_date: date
