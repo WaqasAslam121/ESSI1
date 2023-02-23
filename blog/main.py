@@ -9,6 +9,7 @@ app = FastAPI()
 app.include_router(masterData.router)
 app.include_router(users.router)
 app.include_router(customer.router)
+app.include_router(project.router)
 models.Base.metadata.create_all(engine)
 
 
