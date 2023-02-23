@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, Column, String, Boolean
+from sqlalchemy import Integer, Column, String, Boolean, Date
 from .database import Base
 
 
@@ -45,3 +45,17 @@ class UsersModel(Base):
     email = Column(String)
     password = Column(String)
     active = Column(Boolean)
+    
+class ProjectModel(Base):
+    __tablename__='Project'
+    id = Column(Integer,primary_key=True, index = True)
+    name = Column(String)
+    project_number = Column(String)
+    project_manager = Column(String)
+    site_id = Column(Integer)
+    owner_name = Column(String)
+    customer_id = Column(Integer)
+    customer_project_manager = Column(String)
+    contract_amount = Column(String)
+    start_date = Column(Date) 
+    completion_date = Column(Date)
