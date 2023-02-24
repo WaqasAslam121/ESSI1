@@ -3,7 +3,7 @@ from . import schemas
 from . import models
 from .database import engine, SessionLocal
 from sqlalchemy.orm import Session
-from .routers import masterData, users, customer
+from .routers import masterData, users, customer, project
 
 app = FastAPI()
 app.include_router(masterData.router)
