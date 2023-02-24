@@ -15,7 +15,7 @@ def get_db():
     finally:
         db.close()
 
-@router.post('/customer', status_code=status.HTTP_201_CREATED)
+@router.post('/customer', status_code=status.HTTP_201_CREATED, tags=["Customer"])
 def createCustomer(request: schemas.Customer, db: Session = Depends(get_db)):
     new_record = models.CustomerModel(
         name= request.name, primaryContact = request.primaryContact, streetAddress = request.streetAddress,
@@ -26,12 +26,12 @@ def createCustomer(request: schemas.Customer, db: Session = Depends(get_db)):
     db.refresh(new_record)
     return new_record
 
-@router.get('/customer')
+@router.get('/customer', tags=["Customer"])
 def get_all_customers(db: Session = Depends(get_db)):
     all_users = db.query(models.CustomerModel).all()
     return all_users    
 
-@router.get('/customer/{id}', status_code=200)
+@router.get('/customer/{id}', status_code=200, tags=["Customer"])
 def get_customer(id, response: Response, db: Session = Depends(get_db)):
     customer = db.query(models.CustomerModel).filter(models.CustomerModel.id == id).first()
     if not customer:
@@ -39,7 +39,7 @@ def get_customer(id, response: Response, db: Session = Depends(get_db)):
         return {'detail': 'Not Available'}
     return customer
 
-@router.put('/customer/{id}')
+@router.put('/customer/{id}', tags=["Customer"])
 def update_customer(id, request: schemas.Customer, db: Session = Depends(get_db)):
     customer = db.query(models.CustomerModel).filter(models.CustomerModel.id == id).update(
         { 'name':request.name, 'primaryContact':request.primaryContact, 'streetAddress':request.streetAddress,
@@ -48,7 +48,7 @@ def update_customer(id, request: schemas.Customer, db: Session = Depends(get_db)
     db.commit()
     return customer
 
-@router.delete('/customer/{id}')
+@router.delete('/customer/{id}', tags=["Customer"])
 def delete_customer(id, db: Session = Depends(get_db)):
     record = db.query(models.CustomerModel).filter(
         models.CustomerModel.id == id)

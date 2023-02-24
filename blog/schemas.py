@@ -45,3 +45,10 @@ class Project(BaseModel):
     contract_amount: str
     start_date: date
     completion_date: date
+
+class showUsers(BaseModel):
+    name: str
+    email: str
+    active: bool
+    class Config():
+        orm_mode = True

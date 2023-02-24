@@ -18,7 +18,7 @@ def get_db():
         db.close()
 
 #ContactType -- start
-@router.post('/contacttype', status_code=status.HTTP_201_CREATED)
+@router.post('/contacttype', status_code=status.HTTP_201_CREATED, tags=["Contact"])
 def createContactType(request: schemas.ContactType, db: Session = Depends(get_db)):
     new_record = models.ContactTypeModel(
         description=request.description, active=True)
@@ -27,12 +27,12 @@ def createContactType(request: schemas.ContactType, db: Session = Depends(get_db
     db.refresh(new_record)
     return new_record
 
-@router.get('/contacttype')
+@router.get('/contacttype', tags=["Contact"])
 def get_allContactType(db: Session = Depends(get_db)):
     types = db.query(models.ContactTypeModel).all()
     return types
 
-@router.delete('/contacttype/{id}')
+@router.delete('/contacttype/{id}', tags=["Contact"])
 def delete_contacttype(id, db: Session = Depends(get_db)):
     record = db.query(models.ContactTypeModel).filter(
         models.ContactTypeModel.id == id)
@@ -45,7 +45,7 @@ def delete_contacttype(id, db: Session = Depends(get_db)):
     db.commit()
     return 'Deleted'
 
-@router.get('/contacttype/{id}', status_code=200)
+@router.get('/contacttype/{id}', status_code=200, tags=["Contact"])
 def get_contactType(id, response: Response, db: Session = Depends(get_db)):
     record = db.query(models.ContactTypeModel).filter(models.ContactTypeModel.id == id).first()
     if not record:
@@ -55,7 +55,7 @@ def get_contactType(id, response: Response, db: Session = Depends(get_db)):
 #ContactType --end
 
 #BuildingType --start
-@router.post('/buildingtype', status_code=status.HTTP_201_CREATED)
+@router.post('/buildingtype', status_code=status.HTTP_201_CREATED, tags=["Building"])
 def createBuildingType(request: schemas.ContactType, db: Session = Depends(get_db)):
     new_record = models.BuildingTypeModel(
         description=request.description, active=True)
@@ -64,12 +64,12 @@ def createBuildingType(request: schemas.ContactType, db: Session = Depends(get_d
     db.refresh(new_record)
     return new_record
 
-@router.get('/buildingtype')
+@router.get('/buildingtype', tags=["Building"])
 def get_allBuildingType(db: Session = Depends(get_db)):
     types = db.query(models.BuildingTypeModel).all()
     return types
 
-@router.delete('/buildingtype/{id}')
+@router.delete('/buildingtype/{id}', tags=["Building"])
 def delete_buildingtype(id, db: Session = Depends(get_db)):
     record = db.query(models.BuildingTypeModel).filter(
         models.BuildingTypeModel.id == id)
@@ -82,7 +82,7 @@ def delete_buildingtype(id, db: Session = Depends(get_db)):
     db.commit()
     return 'Deleted'
 
-@router.get('/buildingtype/{id}', status_code=200)
+@router.get('/buildingtype/{id}', status_code=200, tags=["Building"])
 def get_buildingType(id, response: Response, db: Session = Depends(get_db)):
     record = db.query(models.BuildingTypeModel).filter(models.BuildingTypeModel.id == id).first()
     if not record:
@@ -92,7 +92,7 @@ def get_buildingType(id, response: Response, db: Session = Depends(get_db)):
 #BuildingType --end
 
 #DocumentType --start
-@router.post('/documenttype', status_code=status.HTTP_201_CREATED)
+@router.post('/documenttype', status_code=status.HTTP_201_CREATED, tags=["Document"])
 def createDocumentType(request: schemas.ContactType, db: Session = Depends(get_db)):
     new_record = models.DocumentTypeModel(
         description=request.description, active=True)
@@ -101,12 +101,12 @@ def createDocumentType(request: schemas.ContactType, db: Session = Depends(get_d
     db.refresh(new_record)
     return new_record
 
-@router.get('/documenttype')
+@router.get('/documenttype', tags=["Document"])
 def get_allDocumentType(db: Session = Depends(get_db)):
     types = db.query(models.DocumentTypeModel).all()
     return types
 
-@router.delete('/documenttype/{id}')
+@router.delete('/documenttype/{id}', tags=["Document"])
 def delete_documenttype(id, db: Session = Depends(get_db)):
     record = db.query(models.DocumentTypeModel).filter(
         models.DocumentTypeModel.id == id)
@@ -119,7 +119,7 @@ def delete_documenttype(id, db: Session = Depends(get_db)):
     db.commit()
     return 'Deleted'
 
-@router.get('/documenttype/{id}', status_code=200)
+@router.get('/documenttype/{id}', status_code=200, tags=["Document"])
 def get_documentType(id, response: Response, db: Session = Depends(get_db)):
     record = db.query(models.DocumentTypeModel).filter(models.DocumentTypeModel.id == id).first()
     if not record:

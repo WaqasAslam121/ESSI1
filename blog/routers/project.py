@@ -15,7 +15,7 @@ def get_db():
     finally:
         db.close()
 
-@router.post('/project', status_code=status.HTTP_201_CREATED)
+@router.post('/project', status_code=status.HTTP_201_CREATED, tags=["Project"])
 def createProject(request: schemas.Project, db: Session = Depends(get_db)):
     new_record = models.ProjectModel(
         name = request.name, project_number = request.project_number, project_manager = request.project_manager, site_id = request.site_id,
@@ -26,13 +26,13 @@ def createProject(request: schemas.Project, db: Session = Depends(get_db)):
     db.refresh(new_record)
     return new_record
 
-@router.get('/projects')
+@router.get('/projects', tags=["Project"])
 def get_all_projects(db: Session = Depends(get_db)):
     all_projects = db.query(models.ProjectModel).all()
     return all_projects
 
 
-@router.get('/project/{id}', status_code=200)
+@router.get('/project/{id}', status_code=200, tags=["Project"])
 def get_project(id, response: Response, db: Session = Depends(get_db)):
     record = db.query(models.ProjectModel).filter(models.ProjectModel.id == id).first()
     if not record:
@@ -40,7 +40,7 @@ def get_project(id, response: Response, db: Session = Depends(get_db)):
         return {'detail': 'Not Available'}
     return record
 
-@router.put('/project/{id}')
+@router.put('/project/{id}', tags=["Project"])
 def update_project(id, request: schemas.Project, db: Session = Depends(get_db)):
     record = db.query(models.ProjectModel).filter(models.ProjectModel.id == id).update(
         { 'name': request.name, 'project_number': request.project_number, 'project_manager': request.project_manager, 'site_id': request.site_id,
