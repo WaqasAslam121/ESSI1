@@ -52,3 +52,12 @@ class showUsers(BaseModel):
     active: bool
     class Config():
         orm_mode = True
+
+class Sites(BaseModel):
+    name: str
+    owner_name: str
+    street_address: str
+    city: str
+    zipCode: str
+    BuildingType: int
+    isa_campus: bool

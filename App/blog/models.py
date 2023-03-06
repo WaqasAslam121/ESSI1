@@ -59,3 +59,14 @@ class ProjectModel(Base):
     contract_amount = Column(String)
     start_date = Column(Date) 
     completion_date = Column(Date)
+
+class SitesModel(Base):
+    __tablename__='Sites'
+    id = Column(Integer,primary_key=True, index = True)
+    name = Column(String)
+    owner_name = Column(String)
+    street_address= Column(String)
+    city = Column(String)
+    zipCode = Column(String)
+    BuildingType = Column(Integer)
+    isa_campus = Column(Boolean)
