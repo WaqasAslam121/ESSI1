@@ -27,6 +27,11 @@ def get_db():
 def default():
     return "ESSI"
 
+
+@app.get('/create')
+def create():
+    return "create"
+
 '''
 @app.post('/blog', status_code=status.HTTP_201_CREATED)
 def create(request: schemas.Blog, db: Session = Depends(get_db)):
