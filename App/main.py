@@ -1,11 +1,12 @@
 from fastapi import FastAPI, Depends, status, Response, HTTPException
-from blog import schemas
-from blog import models
-from blog.database import engine, SessionLocal
+#from blog import schemas
+#from blog import models
+#from blog.database import engine, SessionLocal
 from sqlalchemy.orm import Session
-from blog.routers import masterData, users, customer, project, authentication, sites
+#from blog.routers import masterData, users, customer, project, authentication, sites
 
 app = FastAPI()
+'''
 app.include_router(masterData.router)
 app.include_router(users.router)
 app.include_router(customer.router)
@@ -13,7 +14,7 @@ app.include_router(project.router)
 app.include_router(authentication.router)
 app.include_router(sites.router)
 models.Base.metadata.create_all(engine)
-
+'''
 
 def get_db():
     db = SessionLocal()
